@@ -92,19 +92,13 @@ OpenArkiv will allow anyone to create an encrypted payload, send it across a loc
 
 * Owns: Beacon logic, signature recovery, Arkiv integration.
 
-**[Name] – Mesh Networking Lead** | [X hrs/week
-
-* Owns: BLE multi-hop, store-and-forward, chunking.
-
-**[Name] – Mobile/Client Lead** | [X hrs/week]
-
 * Owns: UI, passkey wallets, cMixx integration, payload creation.
 
-**[Name] – Arkiv/Smart Data Lead** | [X hrs/week]
+* Owns: DB-chain schema, indexers, dashboard. 
 
-* Owns: DB-chain schema, indexers, dashboard.
+** Romario Kavin – Mesh Networking Lead** | [X hrs/week
 
-*(You can adjust names + workload based on the actual team.)*
+* Owns: BLE multi-hop, store-and-forward, chunking.
 
 ---
 
@@ -138,12 +132,3 @@ OpenArkiv will allow anyone to create an encrypted payload, send it across a loc
 * NGO and investigative journalist partners using OpenArkiv in real scenarios.
 * A public Arkiv-backed database of verified global submissions.
 * Establish OpenArkiv as the default censorship-proof submission tool for high-risk regions.
-
----
-
-If you want, I can generate:
-
-* A **1-page PDF version**
-* A **Notion-ready template**
-* A **more polished, concise hackathon version**
-  Just tell me!
