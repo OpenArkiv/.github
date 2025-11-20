@@ -1,48 +1,42 @@
+
 ## **MILESTONE 2 PLAN: OpenArkiv**
 
-**Team:** OpenArkiv
-**Track:** [✓] SHIP-A-TON [ ] IDEA-TON
-**Date:** 16-11-2025
+**Team:** OpenArkiv
+**Track:** [✓] SHIP-A-TON [ ] IDEA-TON  
+**Date:**  20-11-2025
 
 ---
 
 ## 📍 WHERE WE ARE NOW
 
 **What we built/validated this weekend:**
-
-* Designed full OpenArkiv architecture (Mesh → cMixx → Beacon → Arkiv DB-chain).
-* Implemented initial BLE mesh broadcast & relay prototype.
-* Integrated xxDK/cMixx messaging for Whistleblower Mode experimental flow.
-* Created Beacon server logic (signature recovery → Arkiv submission).
-* Defined Arkiv DB-chain schema for payload + metadata storage.
-
+- Designed full end-to-end architecture: Mesh → cMixx → Beacon → Arkiv DB-chain.
+- Built initial BLE mesh prototype for offline packet broadcast and relaying.
+- Integrated xxDK/cMixx for early Whistleblower Mode anonymized message transport.
+- Implemented Beacon logic to receive payloads and submit to Arkiv testnet.
+    
 **What's working:**
-
-* Payload creation + authentication on client.
-* BLE device discovery and multi-hop forwarding.
-* cMixx payload wrapping and anonymized transmission (early path test).
-* Beacon receiving and validating signed messages.
+- Client can create and sign  text payloads (text).
+- BLE multi-hop relays function across multple devices.
+- Basic cMixx payload routing to exit node → Beacon. (slow initialization due to gateways)
 
 **What still needs work:**
-
-* Stable BLE store-and-forward under movement and sleep conditions.
-* Full message chunking/reassembly for larger media.
-* Anonymous → Beacon → Arkiv flow reliability improvements.
-* Production-ready Arkiv submission with retries/fallbacks.
-
-**Blockers or hurdles we hit:**
-
-* BLE bandwidth limitations requiring chunk-level optimization.
-* cMixx documentation gaps around batching and exit-node routing.
-* Beacon discovery edge cases where nodes intermittently lose internet.
-* Arkiv SDK inconsistencies between devnet vs local testnet.
-
+- Stable chunking + reassembly for larger payloads (photos/videos).
+- Reliable Beacon → Arkiv submission with retries and fallback logic.
+- Upload other file type payloads through the network
+- Location based queries for the submitted payloads across a the "OpenArk" map view
+    
+**Blockers or hurdles we hit:*
+- BLE bandwidth & connection reliability under movement.
+- cMixx documentation gaps around batching and delivery guarantees.
+- cmixx xxdk SDK go lang to typescript connectors -adapters
+    
 ---
 
 ## 🚀 WHAT WE'LL SHIP IN 30 DAYS
 
-**Our MVP will do this:**
-OpenArkiv will allow anyone to create an encrypted payload, send it across a local Bluetooth mesh without internet, and have a Beacon device upload it to Arkiv. Users can choose between signed journalist mode or fully anonymous whistleblower mode using cMixx.
+**Our MVP will do this:**  
+OpenArkiv will let a user create an encrypted payload (text + file upload), send it across a Bluetooth mesh with zero internet, and have a Beacon device upload it to Arkiv. Users can choose between Verified (signed) mode and Anonymous (cMixx) mode, ensuring safe, censorship-resistant reporting for journalists and whistleblowers.
 
 ---
 
@@ -50,85 +44,75 @@ OpenArkiv will allow anyone to create an encrypted payload, send it across a loc
 
 ---
 
-### **Week 1–2**
+**Week 1–2:**
 
-**Feature:** Reliable Mesh Messaging v1
-**Why it matters:** The mesh is the foundation; data must travel hop-by-hop without internet.
-**Who builds it:** ___________
-
-**Feature:** Passkey → Wallet Derivation + Signed Mode
-**Why it matters:** Enables verifiable journalist submissions with provenance.
-**Who builds it:** ___________
+- **Feature:** Mesh Messaging v1: Reliable BLE multi-hop with store-and-forward (multi device hops need to implemented at scale)- prevent fails and add basic queue logic for message relays.
+- **Why it matters:** This is the foundation — without reliable mesh, no offline transmission is possible.
+- **Who builds it:** Romario Kavin
+    
 
 ---
 
-### **Week 2–3**
+**Week 2–3:**
 
-**Feature:** cMixx Whistleblower Mode Integration
-**Why it matters:** Ensures metadata-free submissions for high-risk users; core differentiator.
-**Who builds it:** ___________
-
-**Feature:** Beacon Node + Arkiv Submission
-**Why it matters:** Beacon is the exit point to Arkiv; must be stable and reliable.
-**Who builds it:** ___________
-
----
-
-### **Week 3–4**
-
-**Feature:** Payload Chunking + Reassembly
-**Why it matters:** Enables photo/video evidence to be sent reliably through BLE mesh & cMixx.
-**Who builds it:** ___________
-
-**Feature:** Arkiv Dashboard (simple viewer)
-**Why it matters:** Lets judges and users see live submissions coming from the mesh.
-**Who builds it:** ___________
+- **Feature:** Signed Mode (Passkey → Wallet Derivation + Signature Validation)
+- **Why it matters:** Enables provenance-backed journalism and verified submissions.
+- **Who builds it:** Romario Kavin
+- **Feature:** Whistleblower Mode using cMixx (xxDK Integration).
+- **Why it matters:** Provides metadata-free anonymity for high-risk users.
+- **Who builds it:** Fabian Ferno
+    
 
 ---
 
-### **Team Breakdown**
+**Week 3–4:**
 
-**Fabian Ferno – Backend
-
-* Owns: Beacon logic, signature recovery, Arkiv integration.
-
-* Owns: UI, passkey wallets, cMixx integration, payload creation.
-
-* Owns: DB-chain schema, indexers, dashboard. 
-
-** Romario Kavin – Mesh Networking Lead** | [X hrs/week
-
-* Owns: BLE multi-hop, store-and-forward, chunking.
+- **Feature:** Beacon Node v1: Payload receive → verify signatue + decrypt → submit to Arkiv
+- **Why it matters:** This is the bridge from offline → on-chain, completing the entire flow.
+- **Who builds it:**  Fabian Ferno
+- **Feature:** Payload Chunking + Reassembly
+- **Why it matters:** Allows sending actual photos/videos over BLE and cMixx reliably.
+- **Who builds it:** Romario Kavin
+    
 
 ---
 
-## 🧭 MENTORING & EXPERTISE WE NEED
+### **Team Breakdown (if applicable)**
+
+**[[Fabian Ferno]] – Protocol Design, Backend, PM** | [X hrs/week]
+- Owns: BLE protocol architecture, Arkiv submission logic, indexing, cMixx integration, xxDK flows, Beacon coordination server, project management
+    
+**[[Romario Kavin]] – Swift iOS Dev, Product** | [X hrs/week]
+- Owns: BLE, mesh implementation, Payload creation, passkey wallets, UI, signed mode, multi-hop logic, chunking, Beacon node implementation
+
+---
+
+### **Mentoring & Expertise We Need**
 
 **Areas where we need support:**
-
-* BLE mesh stability in high-device-density environments.
-* Optimizing cMixx routing paths + batching.
-* Designing reliable Arkiv DB-chain indexing models.
+- BLE multi-hop reliability + performance tuning.
+- Best practices for cMixx batching and exit-node routing.
+    
 
 **Specific expertise we're looking for:**
-
-* Someone who has built decentralized mesh apps (Briar, Bridgefy, BitChat).
-* Expert in mixnets, metadata protection, or xxDK internals.
-* Arkiv SDK contributor for performance tuning + schema guidance.
+- Mixnets, xxDK integrations, metadata protection.
+- Arkiv DB-chain design and indexing strategies.
+- Mobile OS constraints around BLE & background execution.
 
 ---
 
 ## 🎯 WHAT HAPPENS AFTER
 
-**When M2 is done, we plan to...**
+**When M2 is done, we plan to…**
 
-* Deploy OpenArkiv in a real world stress test (crowded public area).
-* Begin external testing with journalists/human rights groups for feedback.
-* Package a downloadable early MVP mobile app.
+- Conduct a real-world stress test (campus/protest simulation).
+- Release the first downloadable MVP to early journalist/NGO testers.
+    
 
 **And 6 months out we see our project achieve:**
 
-* Full-featured resilient mesh + anonymous routing stack.
-* NGO and investigative journalist partners using OpenArkiv in real scenarios.
-* A public Arkiv-backed database of verified global submissions.
-* Establish OpenArkiv as the default censorship-proof submission tool for high-risk regions.
+- We will launch the app on the ios app store
+- The default mobile tool for censorship-resistant reporting during internet blackouts.
+- Partnerships with human rights orgs, journalist networks, and DePIN field data programs.
+    
+---
